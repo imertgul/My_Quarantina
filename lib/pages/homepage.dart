@@ -70,12 +70,64 @@ class _HomePageState extends State<HomePage> {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Container(
-          height: (unit * 50) - (20 + statusBarHeight),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.black12,
-          ),
-        ),
+            height: (unit * 50) - (20 + statusBarHeight),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: Colors.black12,
+            ),
+            child: Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: unit * 10,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 5,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 10.0, left: 10, right: 5),
+                            child: Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Renkler.secondary,
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Button Text"),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 10.0, left: 5, right: 10),
+                            child: Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Renkler.secondary,
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Button Text"),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )),
       );
     }
 
