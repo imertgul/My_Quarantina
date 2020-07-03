@@ -10,6 +10,10 @@ class _HomePageState extends State<HomePage> {
   double screenHeight = 0;
   double statusBarHeight = 0;
   double unit = 0;
+  double _animatedWidth = double.infinity;
+  double _animatedHeight = 50;
+  Color _animatedColor = Renkler.third;
+  BorderRadiusGeometry _borderRadius = BorderRadius.circular(500);
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +70,74 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    Widget _buildButtons() {
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          height: unit * 10,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 5,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 10.0, left: 10, right: 5),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _animatedColor == Renkler.third
+                            ? _animatedColor = Renkler.secondary
+                            : _animatedColor = Renkler.third;
+                      });
+                    },
+                    child: Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Renkler.third,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "İhlal Bildir!",
+                          style: buttonTextStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 5,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 10.0, left: 5, right: 10),
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Renkler.secondary,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Geçmiş Kayıtlarım",
+                        style: buttonTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     Widget _buildReport() {
+      _animatedHeight = unit * 20;
+      _animatedWidth = unit * 20;
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Container(
@@ -78,54 +149,25 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: <Widget>[
                 Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: unit * 10,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 5,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 10.0, left: 10, right: 5),
-                            child: Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Renkler.secondary,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text("Button Text"),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 10.0, left: 5, right: 10),
-                            child: Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Renkler.secondary,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text("Button Text"),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                  alignment: Alignment.topCenter,
+                  child: AnimatedContainer(
+                    width: _animatedWidth,
+                    height: _animatedHeight,
+                    decoration: BoxDecoration(
+                      color: _animatedColor,
+                      borderRadius: _borderRadius,
+                    ),
+                    duration: Duration(seconds: 1),
+                    curve: Curves.fastOutSlowIn,
+                    child: Center(
+                      child: Text(
+                        "%100",
+                        style: buttonTextStyle,
+                      ),
                     ),
                   ),
                 ),
+                _buildButtons(),
               ],
             )),
       );
