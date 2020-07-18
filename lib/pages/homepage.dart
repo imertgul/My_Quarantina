@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import '../utilities/constants.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,10 +12,11 @@ class _HomePageState extends State<HomePage> {
   double screenHeight = 0;
   double statusBarHeight = 0;
   double unit = 0;
+  bool _isSelected = true;
   double _animatedWidth = 50;
   double _animatedHeight = 50;
-  Color _animatedColor = Renkler.third;
-  String _animatedText = "Puanınızı görmek için tıklayınız!!";
+  Color _animatedColor = Renkler.fourth;
+  String _animatedText = " ";
   BorderRadiusGeometry _borderRadius = BorderRadius.circular(10);
 
   @override
@@ -33,14 +36,16 @@ class _HomePageState extends State<HomePage> {
                 FittedBox(
                   child: Text(
                     "My Quarantina",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 45.0),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 45.0,
+                        color: Renkler.dark),
                   ),
                 ),
                 IconButton(
                   onPressed: () => print("object"),
                   icon: Icon(Icons.announcement),
-                  color: Colors.black,
+                  color: Renkler.dark,
                 ),
               ]),
         ),
@@ -63,7 +68,10 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.center,
               child: Text(
                 "15 Gün 17 saat",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 45,
+                    color: Renkler.dark),
               ),
             ),
           ),
@@ -143,34 +151,64 @@ class _HomePageState extends State<HomePage> {
 
     Widget _buildPoint() {
       return Padding(
-        padding: const EdgeInsets.only(top: 5.0, left: 10, right: 10),
+        padding: const EdgeInsets.all(10),
         child: Align(
           alignment: Alignment.topCenter,
           child: GestureDetector(
             onTap: () {
-              setState(() {
-                _animatedWidth = unit * 20;
-                // _borderRadius = BorderRadius.circular(500);
-                _animatedColor = Renkler.green;
-                _animatedText = "100%";
-              });
+              if (_animatedText == " ") {
+                setState(() {
+                  _animatedColor = Renkler.green;
+                  _animatedText = "Hesaplanıyor...";
+                  _isSelected = false;
+                });
+                Timer timer = new Timer(new Duration(seconds: 5), () {
+                  setState(() {
+                    _isSelected = true;
+                    _animatedText = "100%";
+                  });
+                });
+              }
             },
-            child: AnimatedContainer(
-              width: _animatedWidth,
+            child: Container(
               height: _animatedHeight,
               decoration: BoxDecoration(
-                color: _animatedColor,
+                color: Colors.black12,
                 borderRadius: _borderRadius,
               ),
-              duration: Duration(seconds: 3),
-              curve: Curves.fastOutSlowIn,
-              child: Center(
-                child: Text(
-                  _animatedText,
-                  style: TextStyle(
-                      fontSize: 35.0,
-                      color: Renkler.primary,
-                      fontWeight: FontWeight.bold),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: AnimatedContainer(
+                  height: _animatedHeight,
+                  width: _animatedWidth - 10,
+                  decoration: BoxDecoration(
+                    color: _animatedColor,
+                    borderRadius: _borderRadius,
+                  ),
+                  duration: Duration(seconds: 5),
+                  curve: Curves.slowMiddle,
+                  child: Center(
+                    child: AnimatedDefaultTextStyle(
+                      style: _isSelected
+                          ? TextStyle(
+                              fontSize: 60,
+                              color: Renkler.primary,
+                              fontWeight: FontWeight.bold)
+                          : TextStyle(
+                              fontSize: 24.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w100),
+                      duration: const Duration(milliseconds: 200),
+                      child: Text(_animatedText, overflow: TextOverflow.fade),
+                    ),
+                    // child: Text(
+                    //   _animatedText,
+                    //   style: TextStyle(
+                    //       fontSize: 25.0,
+                    //       color: Renkler.primary,
+                    //       fontWeight: FontWeight.bold),
+                    // ),
+                  ),
                 ),
               ),
             ),
@@ -185,13 +223,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: <Widget>[
             Container(
-              height: _animatedHeight,
+              height: _animatedHeight + 10,
             ),
             Container(
-              height: unit * 15 - 30,
+              height: unit * 15 - 40,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: Renkler.primary,
+                  color: Renkler.secondary,
                   borderRadius: BorderRadius.circular(10.0)),
             ),
           ],
