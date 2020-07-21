@@ -12,6 +12,8 @@ class _HomePageState extends State<HomePage> {
   double statusBarHeight = 0;
   double unit = 0;
   bool _isSelected = true;
+  bool _dayCountStart = false;
+  bool _notAgain = true;
   double _animatedWidth = 50;
   double _animatedHeight = 50;
   Color _animatedColor = Renkler.secondary;
@@ -64,13 +66,26 @@ class _HomePageState extends State<HomePage> {
               color: Renkler.primary,
             ),
             child: Container(
-              alignment: Alignment.center,
-              child: Text(
-                "15 Gün 17 saat",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 45,
-                    color: Renkler.dark),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "13 Gün 22 saat",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 45,
+                          color: Renkler.dark),
+                    ),
+                    Text(
+                      "Bitirmeniz için kalan süre: 2 gün 4 saat",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Renkler.dark),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -127,7 +142,9 @@ class _HomePageState extends State<HomePage> {
                       const EdgeInsets.only(bottom: 10.0, left: 5, right: 10),
                   child: GestureDetector(
                     onTap: () {
-                      print("Geçmiş kayıtlar");
+                      setState(() {
+                        _dayCountStart = !_dayCountStart;
+                      });
                     },
                     child: Container(
                       height: double.infinity,
@@ -167,6 +184,7 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   _animatedColor = Renkler.green;
                   _isSelected = false;
+                  _notAgain = false;
                   _animatedText = "Hesaplanıyor...";
                 });
                 Timer timer = new Timer(new Duration(seconds: 5), () {
@@ -196,12 +214,16 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            _isSelected ? "Puanınızı görmek için dokunun" : " ",
+                            _isSelected && _notAgain
+                                ? "Puanınızı görmek için dokunun"
+                                : " ",
                             style: buttonTextStyle,
                           ),
                           SizedBox(height: 5),
                           Text(
-                            _isSelected ? "Her gün değişir..." : " ",
+                            _isSelected && _notAgain
+                                ? "Her gün değişir..."
+                                : " ",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
@@ -275,6 +297,77 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    Widget _buildStarter() {
+      return Column(
+        children: <Widget>[
+          SizedBox(height: statusBarHeight),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Visibility(
+                visible: !_dayCountStart,
+                child: Container(
+                  height: screenHeight - statusBarHeight - 20,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Renkler.primary,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Karantinayı sayacını başlatmadan önce",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Renkler.dark),
+                      ),
+                      Text(
+                        "Girilen bilgiler cihazda kalır, aktarılmaz",
+                        style: TextStyle(
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Renkler.dark),
+                      ),
+                      Text(
+                        "Sadece cevaplarınız raporu etkileyebilir",
+                        style: TextStyle(
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Renkler.dark),
+                      ),
+                      Text(
+                        "My Quarantina sadece size yardımcı olur",
+                        style: TextStyle(
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Renkler.dark),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            _dayCountStart = true;
+                          });
+                        },
+                        child: Text(
+                          "Başlamak için dokunun...",
+                          style: TextStyle(
+                              // fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Renkler.dark),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -295,7 +388,8 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          )
+          ),
+          _buildStarter(),
         ],
       ),
     );

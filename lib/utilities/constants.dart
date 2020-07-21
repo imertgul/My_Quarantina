@@ -11,8 +11,9 @@ class Renkler {
   static const Color blue = Color(0xff6891c5);
   static const Color green = Color(0xff007f5f);
   static const Color greenDark = Color(0xff4ba58c);
-  static const Color dark = Color(0xff335c67);
-  static const Color dDark = Color(0xff253141);
+  static const Color dark = Color(0xff000000);
+  static const Color dDark = Color(0xff335c67);
+  static const Color dDarkBlue = Color(0xff253141);
 }
 
 final buttonTextStyle = TextStyle(
