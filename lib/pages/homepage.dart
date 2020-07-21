@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../utilities/constants.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   bool _isSelected = true;
   double _animatedWidth = 50;
   double _animatedHeight = 50;
-  Color _animatedColor = Renkler.fourth;
+  Color _animatedColor = Renkler.secondary;
   String _animatedText = " ";
   BorderRadiusGeometry _borderRadius = BorderRadius.circular(10);
 
@@ -62,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Renkler.pDark,
+              color: Renkler.primary,
             ),
             child: Container(
               alignment: Alignment.center,
@@ -107,10 +106,14 @@ class _HomePageState extends State<HomePage> {
                         color: Renkler.third,
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Center(
-                        child: Text(
-                          "İhlal Bildir!",
-                          style: buttonTextStyle,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "İhlal Bildir!",
+                            style: buttonTextStyle,
+                          ),
                         ),
                       ),
                     ),
@@ -130,13 +133,17 @@ class _HomePageState extends State<HomePage> {
                       height: double.infinity,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Renkler.secondary,
+                        color: Renkler.greenDark,
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Center(
-                        child: Text(
-                          "Geçmiş Kayıtlarım",
-                          style: buttonTextStyle,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Geçmiş Kayıtlarım",
+                            style: buttonTextStyle,
+                          ),
                         ),
                       ),
                     ),
@@ -159,8 +166,8 @@ class _HomePageState extends State<HomePage> {
               if (_animatedText == " ") {
                 setState(() {
                   _animatedColor = Renkler.green;
-                  _animatedText = "Hesaplanıyor...";
                   _isSelected = false;
+                  _animatedText = "Hesaplanıyor...";
                 });
                 Timer timer = new Timer(new Duration(seconds: 5), () {
                   setState(() {
@@ -170,24 +177,41 @@ class _HomePageState extends State<HomePage> {
                 });
               }
             },
-            child: Container(
+            child: AnimatedContainer(
               height: _animatedHeight,
+              width: _animatedWidth - 10,
               decoration: BoxDecoration(
-                color: Colors.black12,
+                color: _animatedColor,
                 borderRadius: _borderRadius,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: AnimatedContainer(
-                  height: _animatedHeight,
-                  width: _animatedWidth - 10,
-                  decoration: BoxDecoration(
-                    color: _animatedColor,
-                    borderRadius: _borderRadius,
+              duration: Duration(seconds: 5),
+              curve: Curves.slowMiddle,
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            _isSelected ? "Puanınızı görmek için dokunun" : " ",
+                            style: buttonTextStyle,
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            _isSelected ? "Her gün değişir..." : " ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Renkler.pDark),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  duration: Duration(seconds: 5),
-                  curve: Curves.slowMiddle,
-                  child: Center(
+                  Center(
                     child: AnimatedDefaultTextStyle(
                       style: _isSelected
                           ? TextStyle(
@@ -198,18 +222,11 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 24.0,
                               color: Colors.black,
                               fontWeight: FontWeight.w100),
-                      duration: const Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 1000),
                       child: Text(_animatedText, overflow: TextOverflow.fade),
                     ),
-                    // child: Text(
-                    //   _animatedText,
-                    //   style: TextStyle(
-                    //       fontSize: 25.0,
-                    //       color: Renkler.primary,
-                    //       fontWeight: FontWeight.bold),
-                    // ),
                   ),
-                ),
+                ],
               ),
             ),
           ),
@@ -229,7 +246,7 @@ class _HomePageState extends State<HomePage> {
               height: unit * 15 - 40,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: Renkler.secondary,
+                  color: Renkler.pDark,
                   borderRadius: BorderRadius.circular(10.0)),
             ),
           ],
@@ -246,7 +263,7 @@ class _HomePageState extends State<HomePage> {
             height: (unit * 50) - (20 + statusBarHeight),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Renkler.pDark,
+              color: Renkler.primary,
             ),
             child: Stack(
               children: <Widget>[
