@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_quarantina/pages/inf_menu.dart';
 import 'dart:async';
 import '../utilities/constants.dart';
+// import 'dart:io';
+// import 'package:device_info/device_info.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -44,7 +47,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () => print("object"),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => InformationPage()),
+                    );
+                  },
                   icon: Icon(Icons.announcement),
                   color: Renkler.dark,
                 ),
@@ -55,7 +64,7 @@ class _HomePageState extends State<HomePage> {
 
     Widget _buildDayCounter() {
       return Container(
-        height: unit * 45,
+        height: unit * 60 - 20,
         child: Container(
           alignment: Alignment.center,
           child: Container(
@@ -71,17 +80,18 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "13 Gün 22 saat",
+                      "11 Gün 18 saat",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 45,
                           color: Renkler.dark),
                     ),
                     Text(
-                      "Bitirmeniz için kalan süre: 2 gün 4 saat",
+                      "Bitirmeniz için kalan süre: 2 gün 6 saat",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 15,
                           color: Renkler.dark),
                     ),
                   ],
@@ -97,15 +107,15 @@ class _HomePageState extends State<HomePage> {
       return Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: unit * 10,
+          height: unit * 13,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
                 flex: 5,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 10.0, left: 10, right: 5),
+                  padding: const EdgeInsets.only(
+                      bottom: 10.0, left: 10, right: 5, top: 10),
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -138,8 +148,8 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 flex: 5,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 10.0, left: 5, right: 10),
+                  padding: const EdgeInsets.only(
+                      bottom: 10.0, left: 5, right: 10, top: 10),
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -196,7 +206,7 @@ class _HomePageState extends State<HomePage> {
               }
             },
             child: AnimatedContainer(
-              height: _animatedHeight,
+              height: _animatedHeight - 10,
               width: _animatedWidth - 10,
               decoration: BoxDecoration(
                 color: _animatedColor,
@@ -256,33 +266,13 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    Widget _buildInfoBar() {
-      return Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: _animatedHeight + 10,
-            ),
-            Container(
-              height: unit * 15 - 40,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Renkler.pDark,
-                  borderRadius: BorderRadius.circular(10.0)),
-            ),
-          ],
-        ),
-      );
-    }
-
     Widget _buildReport() {
-      _animatedHeight = unit * 20;
+      _animatedHeight = unit * 17;
       _animatedWidth = double.maxFinite;
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Container(
-            height: (unit * 50) - (20 + statusBarHeight),
+            height: (unit * 35) - (statusBarHeight),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: Renkler.primary,
@@ -290,7 +280,6 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: <Widget>[
                 _buildPoint(),
-                _buildInfoBar(),
                 _buildButtons(),
               ],
             )),

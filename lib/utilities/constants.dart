@@ -18,3 +18,5 @@ class Renkler {
 
 final buttonTextStyle = TextStyle(
     color: Renkler.primary, fontWeight: FontWeight.bold, fontSize: 20);
+final infoTextStyle =
+    TextStyle(color: Renkler.dark, fontWeight: FontWeight.bold, fontSize: 15);
