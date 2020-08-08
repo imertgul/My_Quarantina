@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
 
     Widget _buildPoint() {
       return Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
         child: Align(
           alignment: Alignment.topCenter,
           child: GestureDetector(
