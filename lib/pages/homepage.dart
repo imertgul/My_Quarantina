@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_quarantina/pages/quenstions.dart';
 import 'package:my_quarantina/pages/inf_menu.dart';
 import 'dart:async';
 import '../utilities/constants.dart';
@@ -31,7 +32,8 @@ class _HomePageState extends State<HomePage> {
 
     Widget _buildTitleBar() {
       return Container(
-        height: unit * 5,
+        alignment: Alignment.topLeft,
+        height: unit * 10,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: Row(
@@ -42,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                     "My Quarantina",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 45.0,
+                        fontSize: 30.0,
                         color: Renkler.dark),
                   ),
                 ),
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
 
     Widget _buildDayCounter() {
       return Container(
-        height: unit * 60 - 20,
+        height: unit * 55 - 20,
         child: Container(
           alignment: Alignment.center,
           child: Container(
@@ -118,11 +120,10 @@ class _HomePageState extends State<HomePage> {
                       bottom: 10.0, left: 10, right: 5, top: 10),
                   child: GestureDetector(
                     onTap: () {
-                      setState(() {
-                        _animatedColor == Renkler.secondary
-                            ? _animatedColor = Renkler.third
-                            : _animatedColor = Renkler.secondary;
-                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => QuestionPage()),
+                      );
                     },
                     child: Container(
                       height: double.infinity,
@@ -367,7 +368,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
                 children: <Widget>[
                   SizedBox(height: statusBarHeight),
