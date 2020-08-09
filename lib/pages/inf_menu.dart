@@ -108,22 +108,6 @@ class _InformationPageState extends State<InformationPage> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 5),
                     child: Text(
-                      "Odanızı sık sıkhavalandırın.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Renkler.dark),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Divider(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 5),
-                    child: Text(
                       "Bol sıvı tüketin, dengeli beslenin, uyku düzeninize dikkat edin.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
