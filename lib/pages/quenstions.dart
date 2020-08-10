@@ -68,34 +68,55 @@ class _QuestionPageState extends State<QuestionPage> {
                             height: unit * 40,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                color: Renkler.secondary,
+                                // color: Renkler.secondary,
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Text("hop"),
-                          ),
-                          Container(
-                            height: unit * 5,
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    "Soru 1",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Renkler.dark),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      print("pressed skip button");
-                                    },
-                                    child: Text(
-                                      "Atla",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          color: Renkler.dark),
-                                    ),
-                                  ),
-                                ]),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Başka insanlarla temasta bulundum",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Renkler.dark),
+                                ),
+                                SizedBox(height: 15),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Text("Evet"),
+                                    Text("Hayır"),
+                                  ],
+                                ),
+                                SizedBox(height: 20),
+                                Container(
+                                  height: unit * 5,
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(
+                                          "Soru 1",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Renkler.dark),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            print("pressed skip button");
+                                          },
+                                          child: Text(
+                                            "Atla",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Renkler.dark),
+                                          ),
+                                        ),
+                                      ]),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
