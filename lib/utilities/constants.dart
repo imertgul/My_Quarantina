@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Renkler {
   static const Color primary = Color(0xfffdfffc);
-  static const Color pDark = Color(0xffcccccc);
+  static const Color pDark = Color(0xffe3e5e2);
   static const Color secondary = Color(0xff559cae);
   static const Color third = Color(0xffdf525a);
   static const Color fourth = Color(0xffff9f1c);
@@ -15,6 +15,15 @@ class Renkler {
   static const Color dDark = Color(0xff335c67);
   static const Color dDarkBlue = Color(0xff253141);
 }
+
+Map<int, String> myQuestions = {
+  0: "İnsanlarla temasta bulundum",
+  1: "Virüs havuzu dışından birisiyle temasta bulundum",
+  2: "Ortamda maske ve mesafe kurallarına uyuluyordu",
+  3: "Açık havada yaşandı",
+  4: "15 dakikadan uzundu",
+  5: "Grip belirtisi gösteren birisi/birileri vardı",
+};
 
 final buttonTextStyle = TextStyle(
     color: Renkler.primary, fontWeight: FontWeight.bold, fontSize: 20);
