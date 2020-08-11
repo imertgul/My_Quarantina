@@ -64,12 +64,15 @@ class _QuestionPageState extends State<QuestionPage> {
                         fontWeight: FontWeight.bold, color: Renkler.dark),
                   ),
                   SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text("Evet"),
-                      Text("Hayır"),
-                    ],
+                  GestureDetector(
+                    onTap: () => buttonCarouselController.nextPage(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Text("Evet"),
+                        Text("Hayır"),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 20),
                 ],
@@ -120,6 +123,21 @@ class _QuestionPageState extends State<QuestionPage> {
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 15, color: Renkler.dark),
+          ),
+          Text(
+            "Cevaplarınız sizden başka kimse göremez.",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15, color: Renkler.dark),
+          ),
+          Text(
+            "Doğru yanıtları vermeye dikkat edin.",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15, color: Renkler.dark),
+          ),
+          Text(
+            "İstediğiniz soruyu atlayabilirsiniz.",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15, color: Renkler.dark),
           ),
         ],
       ),
